@@ -8,22 +8,30 @@
 </head>
 
 <body>
-  <video id="playback"></video>
-  <ul id="filters">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
-  <ul id="controls">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
-  <ul id="demo">
-    <li></li>
-    <li></li>
-  </ul>
+  <div id="booth">
+    <div id="console">
+      <div id="videoDiv">
+        <video id="vide" width="720" height="480"></video>
+      </div>
+      <div id="dashboard">
+        <div id="effects">
+          <a class="effect" id="normal"></a>
+          <a class="effect" id="western"></a>
+          <a class="effect" id="noir"></a>
+          <a class="effect" id="scifi"></a>
+        </div>
+        <div id="controls">
+          <a class="control" id="play"></a>
+          <a class="control" id="pause"></a>
+          <a class="control" id="loop"></a>
+          <a class="control" id="mute"></a>
+        </div>
+        <div id="videoSelection">
+          <a class="videoSelection" id="video1"></a>
+          <a class="videoSelection" id="video2"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
