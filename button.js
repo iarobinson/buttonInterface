@@ -32,6 +32,7 @@ window.onload = function() {
   
   // Adding event handlers to fix play/pause button depressed bug
   video.addEventListener("ended", endedHandler, false);
+  video.addEventListener("play", processFrame, false);
   
   // These are helper functions that visually press or depress buttons
   pushUnpushButtons("video1", []);
@@ -183,6 +184,54 @@ function getFormatExtension() {
 // Global variable for effects
 var effectFunction = null;
 
+function processFrame() {
+  // First set a variable equal to the video object
+  var video = document.getElementById("video");
+  
+  // Check to see if video is playing
+  if (video.paused || video.ended) {
+    return;
+  }
+  
+  // Assign a variable to both canvas elements and their context's 
+  var bufferCanvas = document.getElementById("buffer");
+  var displayCanvas = document.getElementById("display");
+  var buffer = bufferCanvas.getContext("2d");
+  var display = displayCanvas.getContext("2d");
+  
+  // Editing into the buffer (display) a map an image based on the pixels of the video
+  buffer.drawImage(video, 0, 0, bufferCanvas.width, bufferCanvas.height);
+  // Then we take the image data and store it in a variable called frame | parameters signify = all the data
+  var frame = buffer.getImageData(0, 0, bufferCanvas.width, bufferCanvas.height);
+  // Now we need to process the buffer
+  
+  // data is a property of frame| Length is a property of frame.data|
+  //  We divide by for because each pixel has four values RGBA RED GREEN BLUE OPACITY
+  //  to get the length of the frame, we cound all the pixels and divide by four (RGBA).
+  var length = frame.data.length / 4;
+  
+  // We get RGBA data for each pixel
+  for (var i = 0; i < length; i += 1) {
+    var r = frame.data(i * 4 + 0);
+    var g = frame.data(i * 4 + 1);
+    var b = frame.data(i * 4 + 2);
+    if (effectFunction) {
+      effectFunction(i, r, g, b, frame.data);
+    }
+  }
+  
+  display.putImageData(frame, 0, 0);
+  setTimeout(precessFrame, 0);
+}
+
 function noir(pos, r, g, b, data) {
+  // Do something
+}
+
+function western(pos, r, g, b, data) {
+  // Do something
+}
+
+function scifi(pos, r, g, b, data) {
   // Do something
 }
