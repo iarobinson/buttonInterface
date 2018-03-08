@@ -50,8 +50,10 @@ function handleControl(click) {
   }
 }
 
-function isButtonPushed() {
-  
+function isButtonPushed(id) {
+  var anchor = document.getElementById(id);
+  var theClass = anchor.getAttribute("class");
+  return (theClass.indexOf("selected") >= 0);
 }
 
 function setEffect(click) {
@@ -66,7 +68,7 @@ function setEffect(click) {
   } else if (id == "noir") {
     pushUnpushButtons("noir", ["normal", "western", "scifi"]);
   } else if (id == "scifi") {
-    pushUnpushButtons("scifi", ["normal", "western", "scifi"]);
+    pushUnpushButtons("scifi", ["normal", "western", "noir"]);
   }
 }
 
@@ -85,6 +87,7 @@ function setVideo(click) {
 // Here we are doing the logic which seems so obvious in analoge environments.
 // We are passed the button clicked, and should have all other buttons related become unpushed.
 function pushUnpushButtons(push, unpush) {
+  console.log(push, "<- push", unpush, "<-unpush");
   // This just means, if a button is pushed we will do something
   if (push != "") {
     // Anchor variable set to the button which was pushed
@@ -97,18 +100,24 @@ function pushUnpushButtons(push, unpush) {
       theClass += " selected";
       // Resets the anchor back to 'control' 'effect' or "videoSelection" depeding on what button pressed
       anchor.setAttribute("class", theClass);
-      console.log(theClass);
-      // var newImage = "url(images/" + push + "pressed.png)";
-      // anchor.style.backgroundImage = newImage;
     }
   }
   
+  // Iterate through the group of buttons which belong to the button pushed
+  //  e.g. if you press play, we iterate the control buttons
   for (var i = 0; i < unpush.length; i += 1) {
+    // Set variable to the group
     anchor = document.getElementById(unpush[i]);
+    // Set variable equal to the Class which we hope to pull from
     theClass = anchor.getAttribute("class");
+    // Ask if each button has the class selected
     if (theClass.indexOf("selected") >= 0) {
-      // theClass = theClass.replace("selected". "");
+      // Get a variable we can use to deselect the button clicked
+      theClass = theClass.replace(" selected", "");
+      
+      // Since we found buttons that had been selected, we make them unselected.
+      anchor.setAttribute("class", theClass);
+      console.log(theClass, "<- theClass");
     }
   }
-  
 }
