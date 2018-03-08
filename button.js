@@ -30,6 +30,9 @@ window.onload = function() {
     videoLinks[i].onclick = setVideo;
   }
   
+  // Adding event handlers to fix play/pause button depressed bug
+  video.addEventListener("ended", endedHandler, false);
+  
   // These are helper functions that visually press or depress buttons
   pushUnpushButtons("video1", []);
   pushUnpushButtons("normal", []);
@@ -39,23 +42,41 @@ window.onload = function() {
 function handleControl(click) {
   var id = click.target.getAttribute("id");
   // Using the above variable constructor, we get strings based on the value of the button pressed
-  // All of this is cosmetic and changes the way we display the buttons only.
+  
+  // We assign video variable to the video object in the DOM
+  var video = document.getElementById("video");
   if (id == "play") {
     pushUnpushButtons("play", ["pause"]);
+    
+    // Now we control the video using the play button
+    if (video.ended) {
+      // If the video is over and we click play, we reload the video
+      video.load();
+    }
+    // Play loaded video
+    video.play();
   } else if (id == "pause") {
     pushUnpushButtons("pause", ["play"]);
+    
+    // Pause video when we click pause 
+    video.pause();
   } else if (id == "loop") {
     if (isButtonPushed("loop")) {
       pushUnpushButtons("", ["loop"]);
     } else {
       pushUnpushButtons("loop", []);
     }
+    
+    // Here we toggle the loop so we turn it OFF if it were ON and visaversa
+    video.loop = !video.loop;
   } else if (id == "mute") {
     if (isButtonPushed("mute")) {
       pushUnpushButtons("", ["mute"]);
     } else {
       pushUnpushButtons("mute", []);
     }
+    // Here we toggle the mute status of the video object
+    video.muted = !video.muted;
   }
 }
 
@@ -85,18 +106,25 @@ function setEffect(click) {
 // It just applies a variable to the id that has been selected and performs a function based on that selection
 function setVideo(click) {
   var id = click.target.getAttribute("id");
+  // Set variable equal to video element
+  var video = document.getElementById("video");
   
   if (id == "video1") {
     pushUnpushButtons("video1", ["video2"]);
   } else {
     pushUnpushButtons("video2", ["video1"]);
   }
+  video.src = videos[id] + getFormatExtension();
+  video.load();
+  video.play();
+  
+  pushUnpushButtons("play", ["pause"]);
 }
+
 
 // Here we are doing the logic which seems so obvious in analoge environments.
 // We are passed the button clicked, and should have all other buttons related become unpushed.
 function pushUnpushButtons(push, unpush) {
-  console.log(push, "<- push", unpush, "<-unpush");
   // This just means, if a button is pushed we will do something
   if (push != "") {
     // Anchor variable set to the button which was pushed
@@ -126,14 +154,18 @@ function pushUnpushButtons(push, unpush) {
       
       // Since we found buttons that had been selected, we make them unselected.
       anchor.setAttribute("class", theClass);
-      console.log(theClass, "<- theClass");
     }
   }
+}
+
+function endedHandler() {
+  pushUnpushButtons("", ["play"]);
 }
 
 function getFormatExtension() {
   var video = document.getElementById("video");
   if (video.canPlayType("video/mp4") != "") {
+    console.log(video, "<-video");
     return ".mp4";
   } else if (video.canPlayType("video/webm") != "") {
     return ".webm"
