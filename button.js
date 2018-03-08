@@ -231,12 +231,21 @@ function noir(pos, r, g, b, data) {
   data[pos * 4 + 0] = brightness;
   data[pos * 4 + 1] = brightness;
   data[pos * 4 + 2] = brightness;
+  // essentially this sets the pixels all to greyscale value - I don't 100% get this.
 }
 
 function western(pos, r, g, b, data) {
-  // Do something
+  var brightness = (3 * r + 4 * g + b) >>> 3; // >>> bitwise operator that shifts bits
+  data[pos * 4 + 0] = brightness + 40;
+  data[pos * 4 + 1] = brightness + 20;
+  data[pos * 4 + 2] = brightness - 20;
+  // This just makes each pixel increase or decrease brightness based on something...
+  
 }
 
 function scifi(pos, r, g, b, data) {
-  // Do something
+  var offset = pos * 4;
+  data[offset + 0] = Math.round(255 - r);
+  data[offset + 1] = Math.round(255 - g);
+  data[offset + 3] = Math.round(255 - b);
 }
