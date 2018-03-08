@@ -37,6 +37,7 @@ window.onload = function() {
   // These are helper functions that visually press or depress buttons
   pushUnpushButtons("video1", []);
   pushUnpushButtons("normal", []);
+  video.addEventListener("error", errorHandler, false);
 }
 
 // This function manages when buttons which control the video player
@@ -212,7 +213,6 @@ function processFrame() {
   
   // We get RGBA data for each pixel
   for (var i = 0; i < length; i += 1) {
-    // console.log(frame.data, "<-frame.data", frame, "<-frame")
     var r = frame.data[i * 4 + 0];
     var g = frame.data[i * 4 + 1];
     var b = frame.data[i * 4 + 2];
@@ -248,4 +248,13 @@ function scifi(pos, r, g, b, data) {
   data[offset + 0] = Math.round(255 - r);
   data[offset + 1] = Math.round(255 - g);
   data[offset + 3] = Math.round(255 - b);
+}
+
+function errorHandler() {
+  var video = document.getElementById("video");
+  
+  if (video.error) {
+    video.poster = "<p>Sorry, we had an error</p>"
+    alert(video.error.code, "<- Error in playing video. That is the error code");
+  }
 }

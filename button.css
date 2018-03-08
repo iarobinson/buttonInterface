@@ -1,8 +1,8 @@
 button {
-    background-color: green; /* Green */
+    background-color: green;
     border: none;
     color: white;
-    padding: 5px 5px;
+    padding: 2px 2px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -14,7 +14,6 @@ button.selected {
   background-color: blue;
 }
 
-/* main content */
 div#booth {
 	margin: auto;
 	width: 1100px;
@@ -28,27 +27,28 @@ div#console {
 	left: 0px;
 }
 
-/* video */
 div#videoDiv {
 	position: relative;
 	width: 720px;
-	height: 480px;
-	top: 0px;
+	/* height: 480px;
+	top: 0px; */
 	left: 190px;
 }
+
 video {
 	background-color: white;
 }
+
 div#videoDiv canvas {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 }
+
 canvas#buffer {
 	display: none;
 }
 
-/* dashboard */
 div#dashboard {
 	position: absolute;
 	left: 130px;
@@ -67,22 +67,26 @@ div#effects {
 	width: 259px;
 	height: 56px;
 }
+
 button#normal {
 	position: relative;
 	width: 68px;
 	top: 0px;
 }
+
 button#western {
 	position: absolute;
 	width: 62px;
 	top: 0px;
 	left: 68px;
 }
+
 button#noir {
 	position: absolute;
 	top: 0px;
 	left: 130px;
 }
+
 button#scifi {
 	position: absolute;
 	top: 0px;
@@ -96,20 +100,24 @@ div#controls {
 	width: 259px;
 	height: 56px;
 }
+
 button#play {
 	position: relative;
 	top: 0px;
 }
+
 button#pause {
 	position: absolute;
 	top: 0px;
 	left: 64px;
 }
+
 button#loop {
 	position: absolute;
 	top: 0px;
 	left: 128px;
 }
+
 button#mute {
 	position: absolute;
 	top: 0px;
@@ -123,11 +131,13 @@ div#videoSelection {
 	width: 137px;
 	height: 56px;
 }
+
 button#video1 {
 	position: relative;
 	width: 68px;
 	top: 0px;
 }
+
 button#video2 {
 	position: absolute;
 	top: 0px;
