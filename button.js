@@ -212,20 +212,25 @@ function processFrame() {
   
   // We get RGBA data for each pixel
   for (var i = 0; i < length; i += 1) {
-    var r = frame.data(i * 4 + 0);
-    var g = frame.data(i * 4 + 1);
-    var b = frame.data(i * 4 + 2);
+    // console.log(frame.data, "<-frame.data", frame, "<-frame")
+    var r = frame.data[i * 4 + 0];
+    var g = frame.data[i * 4 + 1];
+    var b = frame.data[i * 4 + 2];
     if (effectFunction) {
       effectFunction(i, r, g, b, frame.data);
     }
   }
   
   display.putImageData(frame, 0, 0);
-  setTimeout(precessFrame, 0);
+  setTimeout(processFrame, 0);
 }
 
 function noir(pos, r, g, b, data) {
-  // Do something
+  var brightness = (3 * r + 4 * g + b) >>> 3; // >>> bitwise operator that shifts bits
+  if (brightness < 0) brightness = 0;
+  data[pos * 4 + 0] = brightness;
+  data[pos * 4 + 1] = brightness;
+  data[pos * 4 + 2] = brightness;
 }
 
 function western(pos, r, g, b, data) {
