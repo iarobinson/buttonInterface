@@ -93,12 +93,17 @@ function setEffect(click) {
   // Now we run through if statements to decide which button was clicked and how the graphics should respond
   if (id == "normal") {
     pushUnpushButtons("normal", ["western", "noir", "scifi"]);
+    // Here we set the effect function for the video
+    effectFunction = null;
   } else if (id == "western") {
     pushUnpushButtons("western", ["normal", "noir", "scifi"]);
+    effectFunction = western;
   } else if (id == "noir") {
     pushUnpushButtons("noir", ["normal", "western", "scifi"]);
+    effectFunction = noir;
   } else if (id == "scifi") {
     pushUnpushButtons("scifi", ["normal", "western", "noir"]);
+    effectFunction = scifi;
   }
 }
 
@@ -165,11 +170,19 @@ function endedHandler() {
 function getFormatExtension() {
   var video = document.getElementById("video");
   if (video.canPlayType("video/mp4") != "") {
-    console.log(video, "<-video");
     return ".mp4";
   } else if (video.canPlayType("video/webm") != "") {
     return ".webm"
   } else if (video.canPlayType("video/ogg") != "") {
     return ".ogv";
   }
+}
+
+// VIDEO EFFECT FUNCTIONS //
+
+// Global variable for effects
+var effectFunction = null;
+
+function noir(pos, r, g, b, data) {
+  // Do something
 }

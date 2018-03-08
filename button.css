@@ -2,14 +2,139 @@ button {
     background-color: green; /* Green */
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 5px 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     font-variant-caps: all-petite-caps;
 }
 
 button.selected {
   background-color: blue;
+}
+
+/* main content */
+div#booth {
+	margin: auto;
+	width: 1100px;
+}
+
+div#console {
+	position: relative;
+	width: 1100px;
+	height: 981px;
+	top: 0px;
+	left: 0px;
+}
+
+/* video */
+div#videoDiv {
+	position: relative;
+	width: 720px;
+	height: 480px;
+	top: 0px;
+	left: 190px;
+}
+video {
+	background-color: white;
+}
+div#videoDiv canvas {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+canvas#buffer {
+	display: none;
+}
+
+/* dashboard */
+div#dashboard {
+	position: absolute;
+	left: 130px;
+}
+
+button.effect, button.control, button.videoSelection {
+	display: block;
+	width: 64px;
+	height: 56px;
+}
+
+div#effects {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 259px;
+	height: 56px;
+}
+button#normal {
+	position: relative;
+	width: 68px;
+	top: 0px;
+}
+button#western {
+	position: absolute;
+	width: 62px;
+	top: 0px;
+	left: 68px;
+}
+button#noir {
+	position: absolute;
+	top: 0px;
+	left: 130px;
+}
+button#scifi {
+	position: absolute;
+	top: 0px;
+	left: 194px;
+}
+
+div#controls {
+	position: absolute;
+	top: 0px;
+	left: 350px;
+	width: 259px;
+	height: 56px;
+}
+button#play {
+	position: relative;
+	top: 0px;
+}
+button#pause {
+	position: absolute;
+	top: 0px;
+	left: 64px;
+}
+button#loop {
+	position: absolute;
+	top: 0px;
+	left: 128px;
+}
+button#mute {
+	position: absolute;
+	top: 0px;
+	left: 192px;
+}
+
+div#videoSelection {
+	position: absolute;
+	top: 0px;
+	left: 700px;
+	width: 137px;
+	height: 56px;
+}
+button#video1 {
+	position: relative;
+	width: 68px;
+	top: 0px;
+}
+button#video2 {
+	position: absolute;
+	top: 0px;
+	width: 70px;
+	left: 68px;
+}
+
+button:hover {
+	cursor: pointer;
 }
