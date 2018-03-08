@@ -1,8 +1,17 @@
+var videos = { video1: "video/demovideo1", video2: "video/demovideo2" };
+
 // Once page is fully loaded, we commence with the program
 // *This could be refactored with a helper function to avoid the non-DRY elements
 window.onload = function() {
-  // Applies each set of buttons to a variable and loops over each
   
+  // First we get the video element and assign it to video variable
+  var video = document.getElementById("video");
+  // Then we get the video and it's extension
+  video.src = videos.video1 + getFormatExtension();
+  // Then we load the video
+  video.load();
+  
+  // Applies each set of buttons to a variable and loops over each
   // First we do control links
   var controlLinks = document.querySelectorAll("button.control");
   for (var i = 0; i < controlLinks.length; i += 1) {
@@ -119,5 +128,16 @@ function pushUnpushButtons(push, unpush) {
       anchor.setAttribute("class", theClass);
       console.log(theClass, "<- theClass");
     }
+  }
+}
+
+function getFormatExtension() {
+  var video = document.getElementById("video");
+  if (video.canPlayType("video/mp4") != "") {
+    return ".mp4";
+  } else if (video.canPlayType("video/webm") != "") {
+    return ".webm"
+  } else if (video.canPlayType("video/ogg") != "") {
+    return ".ogv";
   }
 }
